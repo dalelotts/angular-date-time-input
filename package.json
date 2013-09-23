@@ -1,0 +1,24 @@
+{
+    "name": "angular-date-time-input",
+    "version": "0.1.0",
+    "description": "This angular directive allows users to manually enter date-time values in a variety of formats but displays the date value in the specified format.",
+    "author": "https://github.com/dalelotts/angular-date-time-input/graphs/contributors",
+    "license": "MIT",
+    "homepage": "https://github.com/dalelotts/angular-date-time-input",
+    "main": "src/dateTimeInput.js",
+    "dependencies": {},
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.2.0",
+        "grunt-istanbul-coverage": "0.0.1",
+        "grunt-karma": "~0.4.3",
+        "matchdep": "~0.1.1"
+    },
+    "scripts": {
+        "test": "grunt --verbose"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/dalelotts/angular-date-time-input.git"
+    }
+}

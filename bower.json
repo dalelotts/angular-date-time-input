@@ -1,0 +1,28 @@
+{
+  "name": "angular-date-time-input",
+  "version": "0.1.0",
+  "description": "This angular directive emulates the Grails sortableColumn tag.",
+  "author": "https://github.com/dalelotts/angular-date-time-input/graphs/contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/dalelotts/angular-date-time-input",
+  "main": "./src/js/sortableColumn.js",
+  "ignore": [
+    "**/.*",
+    "screenshots",
+    "node_modules",
+    "bower_components",
+    "test*",
+    "demo*",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies": {
+    "angular": "~1.x",
+    "moment": "~2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.x",
+    "angular-scenario": "~1.x",
+    "jquery": "1.10.2"
+  }
+}
