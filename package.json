@@ -19,6 +19,7 @@
     "moment": "^2.x"
   },
   "devDependencies": {
+    "angular-mocks": "^1.x",
     "bower": "latest",
     "cz-conventional-changelog": "^1.1.5",
     "grunt": "^0.4.4",
@@ -27,6 +28,7 @@
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
     "jasmine-core": "^2.4.1",
+    "jquery": "^2.2.0",
     "jshint": "^2.9.1",
     "jshint-stylish": "^2.1.0",
     "karma": "^0.13.19",
@@ -41,9 +43,9 @@
     "phantomjs": "^1.9.19",
     "plato": "^1.5.0",
     "run-browser": "^2.0.2",
+    "semantic-release": "^4.3.5",
     "standard": "^5.4.1",
-    "tape": "^4.4.0",
-    "semantic-release": "^4.3.5"
+    "tape": "^4.4.0"
   },
   "scripts": {
     "test": "npm run test-browserify && gulp",
