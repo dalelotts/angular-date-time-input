@@ -42,7 +42,7 @@
     "phantomjs": "^1.9.19",
     "plato": "^1.5.0",
     "run-browser": "^2.0.2",
-    "semantic-release": "^4.3.5",
+    "semantic-release": "^6.2.0",
     "standard": "^5.4.1",
     "tape": "^4.4.0"
   },
