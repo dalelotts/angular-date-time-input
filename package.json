@@ -1,24 +1,63 @@
 {
-    "name": "angular-date-time-input",
-    "version": "0.1.0",
-    "description": "This angular directive allows users to manually enter date-time values in a variety of formats but displays the date value in the specified format.",
-    "author": "https://github.com/dalelotts/angular-date-time-input/graphs/contributors",
-    "license": "MIT",
-    "homepage": "https://github.com/dalelotts/angular-date-time-input",
-    "main": "src/dateTimeInput.js",
-    "dependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.1",
-        "grunt-contrib-jshint": "~0.2.0",
-        "grunt-istanbul-coverage": "0.0.1",
-        "grunt-karma": "~0.4.3",
-        "matchdep": "~0.1.1"
-    },
-    "scripts": {
-        "test": "grunt --verbose"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/dalelotts/angular-date-time-input.git"
+  "name": "angular-date-time-input",
+  "description": "This angular directive allows users to manually enter date-time values in a variety of formats but displays the date value in the specified format.",
+  "author": "https://github.com/dalelotts/angular-date-time-input/graphs/contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/dalelotts/angular-date-time-input",
+  "main": "src/dateTimeInput.js",
+  "keywords": [
+    "angular",
+    "date input",
+    "date",
+    "directive",
+    "moment",
+    "time input",
+    "time"
+  ],
+  "dependencies": {
+    "angular": "^1.x",
+    "moment": "^2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.x",
+    "cz-conventional-changelog": "^1.1.5",
+    "grunt": "^0.4.4",
+    "grunt-bump": "^0.7.0",
+    "gulp": "^3.8.11",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "jasmine-core": "^2.4.1",
+    "jquery": "^2.2.0",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.2",
+    "karma-phantomjs-launcher": "^0.2.3",
+    "karma-threshold-reporter": "^0.1.12",
+    "lodash": "^4.0.0",
+    "matchdep": "^1.0.0",
+    "phantomjs": "^1.9.19",
+    "plato": "^1.5.0",
+    "run-browser": "^2.0.2",
+    "semantic-release": "^4.3.5",
+    "standard": "^5.4.1",
+    "tape": "^4.4.0"
+  },
+  "scripts": {
+    "test": "npm run test-browserify && gulp",
+    "test-browserify": "run-browser test/commonjs/browserify.test.js -b",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dalelotts/angular-date-time-input.git"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
     }
+  }
 }
