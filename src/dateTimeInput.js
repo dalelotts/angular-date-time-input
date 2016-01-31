@@ -24,10 +24,54 @@
 }(function (angular, moment) {
 	'use strict';
 	angular.module('ui.dateTimeInput', [])
-		.value('dateTimeInputConfig')
-		.directive('dateTimeInput', [dateTimeInputDirective]);
+		.service('dateTimeParserFactory', DateTimeParserFactoryService)
+		.directive('dateTimeInput', DateTimeInputDirective);
 
-	function dateTimeInputDirective() {
+	DateTimeParserFactoryService.$inject = [];
+
+	function DateTimeParserFactoryService() {
+		return function ParserFactory(modelType, inputFormats, dateParseStrict) {
+			var result;
+			// Behaviors
+			switch (modelType) {
+				case 'Date':
+					result = dateParser;
+					break;
+				case 'moment':
+					result = momentParser;
+					break;
+				case 'milliseconds':
+					result = millisecondParser;
+					break;
+				default: // It is assumed that the modelType is a formatting string.
+					result = stringParserFactory(modelType);
+			}
+
+			return result;
+
+			function dateParser(viewValue) {
+				return momentParser(viewValue).toDate();
+			}
+
+			function momentParser(viewValue) {
+				return moment(viewValue, inputFormats, moment.locale(), dateParseStrict);
+			}
+
+			function millisecondParser(viewValue) {
+				return moment.utc(viewValue, inputFormats, moment.locale(), dateParseStrict).valueOf();
+			}
+
+			function stringParserFactory(modelFormat) {
+				return function stringParser(viewValue) {
+					return momentParser(viewValue).format(modelFormat);
+				};
+			}
+		};
+	}
+
+	DateTimeInputDirective.$inject = ['dateTimeParserFactory'];
+
+	function DateTimeInputDirective(dateTimeParserFactory) {
 		return {
 			require: 'ngModel',
 			restrict: 'A',
@@ -58,14 +102,13 @@
 			var inputFormats = [attrs.dateTimeInput, modelType].concat(scope.dateFormats).concat([moment.ISO_8601]).filter(unique);
 
 			// Behaviors
-			controller.$parsers.unshift(parserFactory(modelType));
+			controller.$parsers.unshift(dateTimeParserFactory(modelType, inputFormats, dateParseStrict));
 
 			controller.$formatters.push(formatter);
 
 			controller.$validators.dateTimeInput = validator;
 
 			element.bind('blur', applyFormatters);
-
 
 			// Implementation
 
@@ -89,44 +132,6 @@
 				}
 
 				return modelValue;
-			}
-
-			function parserFactory(modelType) {
-				var result;
-				// Behaviors
-				switch (modelType) {
-					case 'Date':
-						result = dateParser;
-						break;
-					case 'moment':
-						result = momentParser;
-						break;
-					case 'milliseconds':
-						result = millisecondParser;
-						break;
-					default: // It is assumed that the modelType is a formatting string.
-						result = stringParserFactory(modelType);
-				}
-
-				return result;
-
-				function dateParser(viewValue) {
-					return momentParser(viewValue).toDate();
-				}
-
-				function momentParser(viewValue) {
-					return moment(viewValue, inputFormats, moment.locale(), dateParseStrict);
-				}
-
-				function millisecondParser(viewValue) {
-					return moment.utc(viewValue, inputFormats, moment.locale(), dateParseStrict).valueOf();
-				}
-
-				function stringParserFactory(modelFormat) {
-					return function stringParser(viewValue) {
-						return momentParser(viewValue).format(modelFormat);
-					};
-				}
 			}
 
 			function applyFormatters() {
