@@ -2,7 +2,7 @@
 /*jslint vars:true */
 
 /**
- * @license angular-date-time-input  version: 0.1.0
+ * @license angular-date-time-input
  * (c) 2013-2015 Knight Rider Consulting, Inc. http://www.knightrider.com
  * License: MIT
  *
@@ -35,19 +35,29 @@
 			// Behaviors
 			switch (modelType) {
 				case 'Date':
-					result = dateParser;
+					result = handleEmpty(dateParser);
 					break;
 				case 'moment':
-					result = momentParser;
+					result = handleEmpty(momentParser);
 					break;
 				case 'milliseconds':
-					result = millisecondParser;
+					result = handleEmpty(millisecondParser);
 					break;
 				default: // It is assumed that the modelType is a formatting string.
-					result = stringParserFactory(modelType);
+					result = handleEmpty(stringParserFactory(modelType));
 			}
 
 			return result;
+
+			function handleEmpty(delegate) {
+				return function (viewValue) {
+					if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
+						return null;
+					} else {
+						return delegate(viewValue);
+					}
+				};
+			}
 
 			function dateParser(viewValue) {
 				return momentParser(viewValue).toDate();
@@ -118,20 +128,23 @@
 			}
 
 			function validator(modelValue, viewValue) {
-				return angular.isDefined(viewValue) ? moment(viewValue, inputFormats, moment.locale(), dateParseStrict).isValid() : true;
+				if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
+					return true;
+				}
+				return moment(viewValue, inputFormats, moment.locale(), dateParseStrict).isValid();
 			}
 
 			function formatter(modelValue) {
+				if (angular.isUndefined(modelValue) || modelValue === '' || modelValue === null) {
+					return null;
+				}
 
 				if (angular.isDate(modelValue)) {
 					return moment(modelValue).format(displayFormat);
 				} else if (angular.isNumber(modelValue)) {
 					return moment.utc(modelValue).format(displayFormat);
-				} else if (angular.isDefined(modelValue)) {
-					return moment(modelValue, inputFormats, moment.locale(), dateParseStrict).format(displayFormat);
 				}
-
-				return modelValue;
+				return moment(modelValue, inputFormats, moment.locale(), dateParseStrict).format(displayFormat);
 			}
 
 			function applyFormatters() {

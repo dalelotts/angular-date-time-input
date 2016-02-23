@@ -3,7 +3,14 @@
 
 Native AngularJS directive that allows user input of a date/time value. Valid dates are displayed in specified format, but input may be in any supported format.
 
+[![MIT License][license-image]][license-url]
 [![Build Status](https://travis-ci.org/dalelotts/angular-date-time-input.png?branch=master)](https://travis-ci.org/dalelotts/angular-date-time-input)
+[![Coverage Status](https://coveralls.io/repos/github/dalelotts/angular-date-time-input/badge.svg?branch=master)](https://coveralls.io/github/dalelotts/angular-date-time-input?branch=master)
+[![Dependency Status](https://david-dm.org/dalelotts/angular-date-time-input.svg)](https://david-dm.org/dalelotts/angular-date-time-input)
+[![devDependency Status](https://david-dm.org/dalelotts/angular-date-time-input/dev-status.svg)](https://david-dm.org/dalelotts/angular-date-time-input#info=devDependencies)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 
 #Dependencies
 
