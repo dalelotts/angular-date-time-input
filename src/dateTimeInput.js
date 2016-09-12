@@ -1,5 +1,5 @@
-/*globals define, module, require */
-/*jslint vars:true */
+/* globals define, module, require, angular, moment */
+/* jslint vars:true */
 
 /**
  * @license angular-date-time-input
@@ -10,156 +10,158 @@
  *    @since  2013-Sep-23
  */
 
-(function (factory) {
-	'use strict';
-	/* istanbul ignore if */
-	if (typeof define === 'function' && /* istanbul ignore next */ define.amd) {
-		define(['angular', 'moment'], factory); // AMD
-		/* istanbul ignore next */
-	} else if (typeof exports === 'object') {
-		module.exports = factory(require('angular'), require('moment')); // CommonJS
-	} else {
-		factory(window.angular, window.moment); // Browser global
-	}
-}(function (angular, moment) {
-	'use strict';
-	angular.module('ui.dateTimeInput', [])
-		.service('dateTimeParserFactory', DateTimeParserFactoryService)
-		.directive('dateTimeInput', DateTimeInputDirective);
+;(function (root, factory) {
+  'use strict'
+  /* istanbul ignore if */
+  if (typeof module !== 'undefined' && module.exports) {
+    var ng = typeof angular === 'undefined' ? require('angular') : angular
+    var mt = typeof moment === 'undefined' ? require('moment') : moment
+    factory(ng, mt)
+    module.exports = 'ui.bootstrap.datetimepicker'
+    /* istanbul ignore next */
+  } else if (typeof define === 'function' && /* istanbul ignore next */ define.amd) {
+    define(['angular', 'moment'], factory)
+  } else {
+    factory(root.angular, root.moment)
+  }
+}(this, function (angular, moment) {
+  'use strict'
+  angular.module('ui.dateTimeInput', [])
+    .service('dateTimeParserFactory', DateTimeParserFactoryService)
+    .directive('dateTimeInput', DateTimeInputDirective)
 
-	DateTimeParserFactoryService.$inject = [];
+  DateTimeParserFactoryService.$inject = []
 
-	function DateTimeParserFactoryService() {
-		return function ParserFactory(modelType, inputFormats, dateParseStrict) {
-			var result;
-			// Behaviors
-			switch (modelType) {
-				case 'Date':
-					result = handleEmpty(dateParser);
-					break;
-				case 'moment':
-					result = handleEmpty(momentParser);
-					break;
-				case 'milliseconds':
-					result = handleEmpty(millisecondParser);
-					break;
-				default: // It is assumed that the modelType is a formatting string.
-					result = handleEmpty(stringParserFactory(modelType));
-			}
+  function DateTimeParserFactoryService () {
+    return function ParserFactory (modelType, inputFormats, dateParseStrict) {
+      var result
+      // Behaviors
+      switch (modelType) {
+        case 'Date':
+          result = handleEmpty(dateParser)
+          break
+        case 'moment':
+          result = handleEmpty(momentParser)
+          break
+        case 'milliseconds':
+          result = handleEmpty(millisecondParser)
+          break
+        default: // It is assumed that the modelType is a formatting string.
+          result = handleEmpty(stringParserFactory(modelType))
+      }
 
-			return result;
+      return result
 
-			function handleEmpty(delegate) {
-				return function (viewValue) {
-					if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
-						return null;
-					} else {
-						return delegate(viewValue);
-					}
-				};
-			}
+      function handleEmpty (delegate) {
+        return function (viewValue) {
+          if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
+            return null
+          } else {
+            return delegate(viewValue)
+          }
+        }
+      }
 
-			function dateParser(viewValue) {
-				return momentParser(viewValue).toDate();
-			}
+      function dateParser (viewValue) {
+        return momentParser(viewValue).toDate()
+      }
 
-			function momentParser(viewValue) {
-				return moment(viewValue, inputFormats, moment.locale(), dateParseStrict);
-			}
+      function momentParser (viewValue) {
+        return moment(viewValue, inputFormats, moment.locale(), dateParseStrict)
+      }
 
-			function millisecondParser(viewValue) {
-				return moment.utc(viewValue, inputFormats, moment.locale(), dateParseStrict).valueOf();
-			}
+      function millisecondParser (viewValue) {
+        return moment.utc(viewValue, inputFormats, moment.locale(), dateParseStrict).valueOf()
+      }
 
-			function stringParserFactory(modelFormat) {
-				return function stringParser(viewValue) {
-					return momentParser(viewValue).format(modelFormat);
-				};
-			}
-		};
-	}
+      function stringParserFactory (modelFormat) {
+        return function stringParser (viewValue) {
+          return momentParser(viewValue).format(modelFormat)
+        }
+      }
+    }
+  }
 
-	DateTimeInputDirective.$inject = ['dateTimeParserFactory'];
+  DateTimeInputDirective.$inject = ['dateTimeParserFactory']
 
-	function DateTimeInputDirective(dateTimeParserFactory) {
-		return {
-			require: 'ngModel',
-			restrict: 'A',
-			scope: {
-				'dateFormats': '='
-			},
-			link: linkFunction
-		};
+  function DateTimeInputDirective (dateTimeParserFactory) {
+    return {
+      require: 'ngModel',
+      restrict: 'A',
+      scope: {
+        'dateFormats': '='
+      },
+      link: linkFunction
+    }
 
-		function linkFunction(scope, element, attrs, controller) {
+    function linkFunction (scope, element, attrs, controller) {
+      // validation
+      if (angular.isDefined(scope.dateFormats) && !angular.isString(scope.dateFormats) && !angular.isArray(scope.dateFormats)) {
+        throw new Error('date-formats must be a single string or an array of strings i.e. date-formats="[\'YYYY-MM-DD\']" ')
+      }
 
-			// validation
-			if (angular.isDefined(scope.dateFormats) && !angular.isString(scope.dateFormats) && !angular.isArray(scope.dateFormats)) {
-				throw 'date-formats must be a single string or an array of strings i.e. date-formats="[\'YYYY-MM-DD\']" ';
-			}
+      if (angular.isDefined(attrs.modelType) && (!angular.isString(attrs.modelType) || attrs.modelType.length === 0)) {
+        throw new Error('model-type must be "Date", "moment", "milliseconds", or a moment format string')
+      }
 
-			if (angular.isDefined(attrs.modelType) && (!angular.isString(attrs.modelType) || attrs.modelType.length === 0 )) {
-				throw 'model-type must be "Date", "moment", "milliseconds", or a moment format string';
-			}
+      // variables
+      var displayFormat = attrs.dateTimeInput || moment.defaultFormat
 
-			// variables
-			var displayFormat = attrs.dateTimeInput || moment.defaultFormat;
+      var dateParseStrict = (attrs.dateParseStrict === undefined || attrs.dateParseStrict === 'true')
 
-			var dateParseStrict = (attrs.dateParseStrict === undefined || attrs.dateParseStrict === 'true');
+      var modelType = (attrs.modelType || 'Date')
 
-			var modelType = (attrs.modelType || 'Date');
+      var inputFormats = [attrs.dateTimeInput, modelType].concat(scope.dateFormats).concat([moment.ISO_8601]).filter(unique)
 
-			var inputFormats = [attrs.dateTimeInput, modelType].concat(scope.dateFormats).concat([moment.ISO_8601]).filter(unique);
+      // Behaviors
+      controller.$parsers.unshift(dateTimeParserFactory(modelType, inputFormats, dateParseStrict))
 
-			// Behaviors
-			controller.$parsers.unshift(dateTimeParserFactory(modelType, inputFormats, dateParseStrict));
+      controller.$formatters.push(formatter)
 
-			controller.$formatters.push(formatter);
+      controller.$validators.dateTimeInput = validator
 
-			controller.$validators.dateTimeInput = validator;
+      element.bind('blur', applyFormatters)
 
-			element.bind('blur', applyFormatters);
+      // Implementation
 
-			// Implementation
+      function unique (value, index, self) {
+        return ['Date', 'moment', 'milliseconds', undefined].indexOf(value) === -1 &&
+          self.indexOf(value) === index
+      }
 
-			function unique(value, index, self) {
-				return ['Date', 'moment', 'milliseconds', undefined].indexOf(value) === -1 &&
-					self.indexOf(value) === index;
-			}
+      function validator (modelValue, viewValue) {
+        if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
+          return true
+        }
+        return moment(viewValue, inputFormats, moment.locale(), dateParseStrict).isValid()
+      }
 
-			function validator(modelValue, viewValue) {
-				if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
-					return true;
-				}
-				return moment(viewValue, inputFormats, moment.locale(), dateParseStrict).isValid();
-			}
+      function formatter (modelValue) {
+        if (angular.isUndefined(modelValue) || modelValue === '' || modelValue === null) {
+          return null
+        }
 
-			function formatter(modelValue) {
-				if (angular.isUndefined(modelValue) || modelValue === '' || modelValue === null) {
-					return null;
-				}
+        if (angular.isDate(modelValue)) {
+          return moment(modelValue).format(displayFormat)
+        } else if (angular.isNumber(modelValue)) {
+          return moment.utc(modelValue).format(displayFormat)
+        }
+        return moment(modelValue, inputFormats, moment.locale(), dateParseStrict).format(displayFormat)
+      }
 
-				if (angular.isDate(modelValue)) {
-					return moment(modelValue).format(displayFormat);
-				} else if (angular.isNumber(modelValue)) {
-					return moment.utc(modelValue).format(displayFormat);
-				}
-				return moment(modelValue, inputFormats, moment.locale(), dateParseStrict).format(displayFormat);
-			}
+      function applyFormatters () {
+        controller.$viewValue = controller.$formatters.filter(keepAll).reverse().reduce(applyFormatter, controller.$modelValue)
+        controller.$render()
 
-			function applyFormatters() {
-				controller.$viewValue = controller.$formatters.filter(keepAll).reverse().reduce(applyFormatter, controller.$modelValue);
-				controller.$render();
+        function keepAll () {
+          return true
+        }
 
-				function keepAll() {
-					return true;
-				}
-
-				function applyFormatter(memo, formatter) {
-					return formatter(memo);
-				}
-			}
-		}
-	}
+        function applyFormatter (memo, formatter) {
+          return formatter(memo)
+        }
+      }
+    }
+  }
 }))
-;
+
