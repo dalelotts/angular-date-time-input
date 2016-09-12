@@ -23,10 +23,9 @@ Requires:
  * MomentJS 2.1.x or higher
 
 #Testing
-We use karma and jshint to ensure the quality of the code. The easiest way to run these checks is to use grunt:
+We use karma and linting tools to ensure the quality of the code. The easiest way to run these checks is to use grunt:
 
 ```
-npm install -g gulp
 npm install
 npm test
 ```
@@ -34,6 +33,27 @@ npm test
 The karma task will try to open Chrome as a browser in which to run the tests. Make sure this is available or change the configuration in test\test.config.js
 
 #Usage
+
+## Bower
+
+This project does not directly support bower. If you are using wiredep, you can dd the following to your 
+bower.json file to allow wiredep to use this directive.
+
+```json
+  "overrides": {
+    "angular-date-time-input": {
+      "main": [
+        "src/js/dateTimeInput.js",
+      ],
+      "dependencies": {
+        "angular": "^1.x",
+        "moment": "^2.x"
+      }
+    }
+  }
+```
+
+## NPM
 We use npm for dependency management. Add the following to your package
 
 ```shell
