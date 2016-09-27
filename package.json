@@ -23,7 +23,6 @@
     "coveralls": "^2.11.6",
     "cz-conventional-changelog": "^1.1.5",
     "eslint": "^3.5.0",
-    "grunt-bump": "^0.8.0",
     "gulp": "^3.8.11",
     "gulp-htmlmin": "^2.0.0",
     "gulp-jscs": "^4.0.0",
