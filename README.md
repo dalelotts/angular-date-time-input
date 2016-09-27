@@ -9,6 +9,7 @@ Native AngularJS directive that allows user input of a date/time value. Valid da
 [![Coverage Status](https://coveralls.io/repos/github/dalelotts/angular-date-time-input/badge.svg?branch=master)](https://coveralls.io/github/dalelotts/angular-date-time-input?branch=master)
 [![Dependency Status](https://david-dm.org/dalelotts/angular-date-time-input.svg)](https://david-dm.org/dalelotts/angular-date-time-input)
 [![devDependency Status](https://david-dm.org/dalelotts/angular-date-time-input/dev-status.svg)](https://david-dm.org/dalelotts/angular-date-time-input#info=devDependencies)
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![PayPal donate button](http://img.shields.io/paypal/donate.png?color=yellow)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=F3FX5W6S2U4BW&lc=US&item_name=Dale%20Lotts&item_number=angular%2dbootstrap%2ddatetimepicker&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted "Donate one-time to this project using Paypal")
@@ -43,7 +44,7 @@ bower.json file to allow wiredep to use this directive.
   "overrides": {
     "angular-date-time-input": {
       "main": [
-        "src/js/dateTimeInput.js",
+        "src/dateTimeInput.js",
       ],
       "dependencies": {
         "angular": "^1.x",
