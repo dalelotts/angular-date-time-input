@@ -112,6 +112,7 @@
       var modelType = (attrs.modelType || 'Date')
 
       var inputFormats = [attrs.dateTimeInput, modelType].concat(scope.dateFormats).concat([moment.ISO_8601]).filter(unique)
+      var formatterFormats = [modelType].concat(inputFormats).filter(unique)
 
       // Behaviors
       controller.$parsers.unshift(dateTimeParserFactory(modelType, inputFormats, dateParseStrict))
@@ -146,7 +147,7 @@
         } else if (angular.isNumber(modelValue)) {
           return moment.utc(modelValue).format(displayFormat)
         }
-        return moment(modelValue, inputFormats, moment.locale(), dateParseStrict).format(displayFormat)
+        return moment(modelValue, formatterFormats, moment.locale(), dateParseStrict).format(displayFormat)
       }
 
       function applyFormatters () {

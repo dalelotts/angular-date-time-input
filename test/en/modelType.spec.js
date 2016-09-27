@@ -340,6 +340,15 @@ describe('modelType', function () {
       expect(element.val()).toBe('Invalid date')
     })
 
+    it('model and display format can be different and ambiguous', function () {
+      $rootScope.date = '11/12/2016'
+
+      var element = $compile('<input data-date-time-input="DD/MM/YYYY" data-ng-model="date" data-model-type="MM/DD/YYYY">')($rootScope)
+      $rootScope.$digest()
+
+      expect(element.val()).toBe('12/11/2016')
+    })
+
     it('is valid if user deletes input', function () {
       var element = $compile('<input data-date-time-input="M/D/YYYY" data-ng-model="date" data-model-type="YYYY-MM-DD">')($rootScope)
       $rootScope.$digest()
