@@ -66,7 +66,7 @@ Load the script files in your application:
 ```html
 <script type="text/javascript" src="node_modules/moment/moment.js"></script>
 <script type="text/javascript" src="node_modules/angular/angular.js"></script>
-<script type="text/javascript" src="node_modules/angular-date-time-input/src/js/dateTimeInput.js"></script>
+<script type="text/javascript" src="node_modules/angular-date-time-input/src/dateTimeInput.js"></script>
 ```
 
 Add this module as a dependency to your application module:
