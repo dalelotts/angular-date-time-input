@@ -164,5 +164,5 @@
       }
     }
   }
-}))
+})); // eslint-disable-line semi
 
