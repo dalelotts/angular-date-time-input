@@ -16,17 +16,17 @@
   ],
   "dependencies": {
     "angular": "^1.x",
-    "moment": "^2.15.x"
+    "moment": "^2.16.x"
   },
   "devDependencies": {
     "angular-mocks": "^1.x",
     "coveralls": "^2.11.14",
     "cz-conventional-changelog": "^1.2.0",
-    "eslint": "^3.8.1",
+    "eslint": "^3.9.1",
     "gulp": "^3.9.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-jscs": "^4.0.0",
-    "gulp-jshint": "^2.0.1",
+    "gulp-jshint": "^2.0.2",
     "gulp-standard": "^8.0.2",
     "jasmine-core": "^2.5.2",
     "jquery": "^3.1.1",
@@ -40,14 +40,14 @@
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-threshold-reporter": "^0.1.15",
     "karma-webpack": "^1.8.0",
-    "lodash": "^4.16.4",
+    "lodash": "^4.16.6",
     "phantomjs-prebuilt": "^2.1.13",
     "plato": "^1.7.0",
     "run-browser": "^2.0.2",
     "semantic-release": "^6.3.0",
-    "standard": "^8.4.0",
+    "standard": "^8.5.0",
     "tape": "^4.6.2",
-    "webpack": "^1.13.2"
+    "webpack": "^1.13.3"
   },
   "scripts": {
     "coverage:upload": "cat build/coverage/lcov.info | coveralls",
