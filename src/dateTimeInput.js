@@ -38,29 +38,19 @@
       // Behaviors
       switch (modelType) {
         case 'Date':
-          result = handleEmpty(dateParser)
+          result = dateParser
           break
         case 'moment':
-          result = handleEmpty(momentParser)
+          result = momentParser
           break
         case 'milliseconds':
-          result = handleEmpty(millisecondParser)
+          result = millisecondParser
           break
         default: // It is assumed that the modelType is a formatting string.
-          result = handleEmpty(stringParserFactory(modelType))
+          result = stringParserFactory(modelType)
       }
 
       return result
-
-      function handleEmpty (delegate) {
-        return function (viewValue) {
-          if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
-            return null
-          } else {
-            return delegate(viewValue)
-          }
-        }
-      }
 
       function dateParser (viewValue) {
         return momentParser(viewValue).toDate()
@@ -115,7 +105,7 @@
       var formatterFormats = [modelType].concat(inputFormats).filter(unique)
 
       // Behaviors
-      controller.$parsers.unshift(dateTimeParserFactory(modelType, inputFormats, dateParseStrict))
+      controller.$parsers.unshift(handleEmpty(dateTimeParserFactory(modelType, inputFormats, dateParseStrict)))
 
       controller.$formatters.push(formatter)
 
@@ -130,23 +120,35 @@
           self.indexOf(value) === index
       }
 
+      function handleEmpty (delegate) {
+        return function (viewValue) {
+          if (controller.$isEmpty(viewValue)) {
+            return null
+          }
+          return delegate(viewValue)
+        }
+      }
+
       function validator (modelValue, viewValue) {
-        if (angular.isUndefined(viewValue) || viewValue === '' || viewValue === null) {
+        if (controller.$isEmpty(viewValue)) {
           return true
         }
         return moment(viewValue, inputFormats, moment.locale(), dateParseStrict).isValid()
       }
 
       function formatter (modelValue) {
-        if (angular.isUndefined(modelValue) || modelValue === '' || modelValue === null) {
+        if (controller.$isEmpty(modelValue)) {
           return null
         }
 
         if (angular.isDate(modelValue)) {
           return moment(modelValue).format(displayFormat)
-        } else if (angular.isNumber(modelValue)) {
+        }
+
+        if (angular.isNumber(modelValue)) {
           return moment.utc(modelValue).format(displayFormat)
         }
+
         return moment(modelValue, formatterFormats, moment.locale(), dateParseStrict).format(displayFormat)
       }
 
