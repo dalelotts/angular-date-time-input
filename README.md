@@ -1,6 +1,8 @@
 # Angular Date/Time input
 ================================
 
+[![Join the chat at https://gitter.im/dalelotts/angular-date-time-input](https://badges.gitter.im/dalelotts/angular-date-time-input.svg)](https://gitter.im/dalelotts/angular-date-time-input?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Native AngularJS directive that allows user input of a date/time value. Valid dates are displayed in specified format, but input may be in any supported format.
 
 [![Join the chat at https://gitter.im/dalelotts/angular-date-time-input](https://badges.gitter.im/dalelotts/angular-date-time-input.svg)](https://gitter.im/dalelotts/angular-date-time-input?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
