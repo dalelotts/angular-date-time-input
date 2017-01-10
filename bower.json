@@ -1,0 +1,10 @@
+{
+  "name": "angular-date-time-input",
+  "license": "MIT",
+  "homepage": "https://github.com/dalelotts/angular-date-time-input",
+  "license": "MIT",
+  "moduleType": "globals",
+  "main": [
+    "src/dateTimeInput.js"
+  ]
+}
