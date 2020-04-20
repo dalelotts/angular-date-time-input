@@ -20,7 +20,8 @@ describe('webpack require', function () {
   });
 
   it('should be available when required', function () {
-    require('../../');
+    var exported = require('../../');
+    expect(exported).toBe('ui.dateTimeInput');
     expect(loadDateTimeInput).not.toThrow();
   });
 });

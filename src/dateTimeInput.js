@@ -17,7 +17,7 @@
     var ng = typeof angular === 'undefined' ? require('angular') : angular
     var mt = typeof moment === 'undefined' ? require('moment') : moment
     factory(ng, mt)
-    module.exports = 'ui.bootstrap.datetimepicker'
+    module.exports = 'ui.dateTimeInput'
     /* istanbul ignore next */
   } else if (typeof define === 'function' && /* istanbul ignore next */ define.amd) {
     define(['angular', 'moment'], factory)
