@@ -25,7 +25,6 @@
     "eslint": "^3.8.1",
     "gulp": "^3.9.1",
     "gulp-htmlmin": "^3.0.0",
-    "gulp-jscs": "^4.0.0",
     "gulp-jshint": "^2.0.1",
     "gulp-standard": "^8.0.2",
     "jasmine-core": "^2.5.2",

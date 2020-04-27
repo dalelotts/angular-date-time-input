@@ -38,7 +38,7 @@ gulp.task('lint', function () {
 })
 
 gulp.task('tdd', function (done) {
-  gulp.watch(paths.all, ['jscs', 'lint'])
+  gulp.watch(paths.all, ['lint'])
 
   var config = testConfig(
     {
