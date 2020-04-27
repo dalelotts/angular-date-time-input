@@ -37,7 +37,7 @@
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.2",
     "karma-threshold-reporter": "^0.1.15",
-    "karma-webpack": "^1.8.0",
+    "karma-webpack": "^4.0.2",
     "lodash": "^4.16.4",
     "phantomjs-prebuilt": "^2.1.13",
     "plato": "^1.7.0",
@@ -45,7 +45,7 @@
     "semantic-release": "^6.3.0",
     "standard": "^8.4.0",
     "tape": "^4.6.2",
-    "webpack": "^1.13.2"
+    "webpack": "^4.43.0"
   },
   "scripts": {
     "coverage:upload": "cat build/coverage/lcov.info | coveralls",

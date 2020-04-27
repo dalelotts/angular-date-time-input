@@ -8,8 +8,6 @@
  * @since 9/11/16.
  */
 
-var webpackConfig = require('./webpack.conf');
-
 module.exports = function(config) {
   'use strict';
   config.set({
@@ -30,10 +28,10 @@ module.exports = function(config) {
     }],
 
     // webpack configuration
-    webpack: webpackConfig,
+    webpack: {},
 
     // webpack middlewae configuration
-    webpackMiddleware: { noInfo: true },
+    webpackMiddleware: { stats: 'errors-only' },
 
     // list of files to exclude
     exclude: [],
