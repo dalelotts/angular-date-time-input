@@ -18,8 +18,7 @@
     var mt = typeof moment === 'undefined' ? require('moment') : moment
     factory(ng, mt)
     module.exports = 'ui.dateTimeInput'
-    /* istanbul ignore next */
-  } else if (typeof define === 'function' && /* istanbul ignore next */ define.amd) {
+  } else /* istanbul ignore next */ if (typeof define === 'function' && define.amd) {
     define(['angular', 'moment'], factory)
   } else {
     factory(root.angular, root.moment)
