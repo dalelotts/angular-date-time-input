@@ -32,9 +32,6 @@ We use Gulp for managing the build. Here are some useful Gulp tasks:
 
   * `npm test` Runs all tests (webpack, commonjs, etc) checks the coding style, lints the code, calculates complexity, runs all tests, and enforces code coverage. You should make sure you do this before submitting a PR.
   * `gulp` The default task checks the coding style, lints the code, calculates complexity, runs the tests (not webpack or commonJS tests), and enforces code coverage.
-  * `gulp scss` Generates the css file from the source scss.
-  * `gulp css-lint` Lint the css files after generating.
-  * `gulp templatecache` Generates src/js/datetimepicker.templates.js. You must re-add the IIFE around the generated code after it is generated (PR to fix this would be apprecaited)
 
 # Contributing to AngularJS
 
