@@ -8,8 +8,6 @@
  * @since 9/11/16.
  */
 
-var webpackConfig = require('./webpack.conf');
-
 module.exports = function(config) {
   'use strict';
   config.set({
@@ -30,10 +28,10 @@ module.exports = function(config) {
     }],
 
     // webpack configuration
-    webpack: webpackConfig,
+    webpack: {},
 
     // webpack middlewae configuration
-    webpackMiddleware: { noInfo: true },
+    webpackMiddleware: { stats: 'errors-only' },
 
     // list of files to exclude
     exclude: [],
@@ -64,7 +62,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['FirefoxHeadless', 'ChromeHeadless'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
@@ -72,6 +70,13 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultaneous
-    concurrency: Infinity
+    concurrency: Infinity,
+
+    // Webpack tests need the tests to run in order in order to test the require call
+    client: {
+        jasmine: {
+            random: false
+        }
+    },
   });
 };

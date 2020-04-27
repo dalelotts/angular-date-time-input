@@ -7,7 +7,7 @@ var nodeModules = [
   'node_modules/angular-mocks/angular-mocks.js'
 ]
 var bumpFiles = ['package.json', 'bower.json', 'README.md', 'src/js/*.js']
-var miscFiles = ['GruntFile.js', 'gulpfile.js', 'karma.conf.js', 'paths.js']
+var miscFiles = ['gulpfile.js', 'karma.conf.js', 'paths.js']
 var demoFiles = []
 var sourceFiles = ['src/**/*.js']
 var testFiles = ['test/**/*.spec.js']

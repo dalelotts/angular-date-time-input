@@ -16,11 +16,12 @@ describe('webpack require', function () {
   }
 
   it('should throw an error if the module is not defined', function () {
-    expect(loadDateTimeInput).toThrow();
+    expect(loadDateTimeInput).toThrowError(/\[\$injector:nomod\] Module 'ui\.dateTimeInput'/);
   });
 
   it('should be available when required', function () {
-    require('../../');
+    var exported = require('../../');
+    expect(exported).toBe('ui.dateTimeInput');
     expect(loadDateTimeInput).not.toThrow();
   });
 });

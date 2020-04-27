@@ -8,7 +8,6 @@ bower_components
 complexity
 coverage
 demo
-Gruntfile.js
 gulpfile.js
 karma.conf.js
 paths.js

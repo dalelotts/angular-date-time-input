@@ -1,15 +1,18 @@
 sudo: false
+dist: bionic
 language: node_js
+node_js:
+  - '12'
+services:
+  - xvfb
+addons:
+  firefox: latest
+  chrome: latest
 cache:
   directories:
     - node_modules
 notifications:
   email: none
-node_js:
-  - '6'
-before_install:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 before_script:
   - npm prune
 script:
