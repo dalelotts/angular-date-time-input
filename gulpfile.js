@@ -43,7 +43,7 @@ gulp.task('tdd', function tdd (done) {
   var config = testConfig(
     {
       autoWatch: true,
-      browsers: ['PhantomJS'],
+      browsers: ['ChromeHeadless'],
       configFile: karmaConfig,
       singleRun: false
     }
@@ -70,7 +70,7 @@ gulp.task('default', gulp.parallel('complexity', 'test'))
 
 var testConfig = function (options) {
   var travisDefaultOptions = {
-    browsers: ['Firefox'],
+    browsers: ['FirefoxHeadless', 'ChromeHeadless'],
     reporters: ['dots', 'coverage', 'threshold']
   }
 

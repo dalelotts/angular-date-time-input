@@ -26,7 +26,6 @@ module.exports = function (config) {
       'karma-jasmine',
       'karma-chrome-launcher',
       'karma-firefox-launcher',
-      'karma-phantomjs-launcher',
       'karma-coverage',
       'karma-threshold-reporter'
     ],
@@ -85,7 +84,7 @@ module.exports = function (config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['FirefoxHeadless', 'ChromeHeadless'],
 
     // If browser does not capture in given timeout [ms], kill it
     captureTimeout: 60000,
