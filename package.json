@@ -22,6 +22,7 @@
     "angular-mocks": "^1.x",
     "coveralls": "^2.11.14",
     "cz-conventional-changelog": "^1.2.0",
+    "del": "^5.1.0",
     "eslint": "^3.8.1",
     "gulp": "^3.9.1",
     "gulp-htmlmin": "^3.0.0",
